@@ -21,7 +21,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-DD Travis User
+#ADD Travis User
 RUN addgroup --gid=1000 travis && \
     adduser --system --uid=1000 --home /home --shell /bin/bash travis && \
     echo "travis ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
