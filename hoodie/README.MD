@@ -43,8 +43,7 @@ The readme has the build command. For emample - `docker build -t hoodie .`. I ju
 
 ## Useful commands
 
-    alias hoodie="docker run --rm -i -v "$PWD":/workspace -w /workspace --privileged hoodie hoodie"
-    docker run --rm -it -v "$PWD":/workspace -w /workspace --privileged hoodie /bin/bash
-    docker run --rm -it hoodie /bin/bash
+    alias hoodie="docker run --rm -it -v $(pwd):/src hoodie hoodie"
+    docker run --rm -it -v $(pwd):/src hoodie
 
 ## References

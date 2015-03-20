@@ -16,8 +16,6 @@ ENV HOODIE_BIND_ADDRESS 0.0.0.0
 RUN adduser --disabled-password --gecos "" xroot && \
   echo "xroot ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-RUN apt-get -yq remove adduser
-
 # Expose the port
 EXPOSE 6001 6002
 
@@ -40,5 +38,3 @@ RUN echo "alias c='clear'" >> /home/xroot/.bashrc
 CMD /bin/bash
 
 ONBUILD RUN npm install
-ONBUILD RUN bower install
-
