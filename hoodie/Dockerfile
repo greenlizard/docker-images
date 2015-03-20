@@ -7,8 +7,8 @@ RUN npm install -g hoodie-cli
  
 # Alt dependencies
  
-RUN addgroup --gid=1000 docker && \
-    adduser --system --uid=1000 --home /workspace --shell /bin/bash docker && \
+RUN addgroup docker && \
+    adduser --system --home /workspace --shell /bin/bash docker && \
     echo "docker ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     chown -R docker:docker /workspace
 
