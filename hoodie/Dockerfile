@@ -1,10 +1,7 @@
 
-FROM greenlizard/nvm
+FROM node:0.10-onbuild
 
 MAINTAINER GreenLizard Labs <gabriel@greenlizard.com.br>
-
-ENV NODE_VERSION 0.10
-RUN /bin/bash -l -c "nvm install $NODE_VERSION && nvm use $NODE_VERSION && rm -rf $HOME/.nvm/bin && ln -s \$NVM_BIN $HOME/.nvm/bin"
 
 RUN addgroup --gid=2000 hoodie && \
     adduser --system --uid=2000 --home /home/hoodie --shell /bin/bash hoodie && \
@@ -13,6 +10,12 @@ RUN addgroup --gid=2000 hoodie && \
     chown -R hoodie:hoodie /usr/local
 
 USER hoodie
+
+RUN /bin/bash "source $HOME/.nvm/nvm.sh"
+
+ENV NODE_VERSION 0.10
+RUN /bin/bash -l -c "nvm install $NODE_VERSION && nvm use $NODE_VERSION && rm -rf $HOME/.nvm/bin && ln -s \$NVM_BIN $HOME/.nvm/bin"
+
 RUN npm install -g hoodie-cli
  
 # Alt dependencies
