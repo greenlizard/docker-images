@@ -15,3 +15,5 @@ EXPOSE 6001 6002
 
 VOLUME /workspace
 WORKDIR /workspace
+
+CMD ["hoodie"]
