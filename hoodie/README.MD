@@ -14,7 +14,7 @@
     git clone git@github.com:greenlizard/docker-images.git
     cd docker-images/hoodie
     docker build -t hoodie .
-    echo "alias hoodie='docker run --rm -i -v \$(pwd):/workspace -w /home/hoodie --privileged  hoodie hoodie'" >> ~/.bash_aliases
+    echo "alias hoodie='docker run --rm -i -v \$(pwd):/workspace -w /workspace --privileged  hoodie hoodie'" >> ~/.bash_aliases
     source ~/.bash_aliases
 
 The alias command lets you use `hoodie` for running any command inside the hoodie container.
@@ -44,6 +44,6 @@ The readme has the build command. For emample - `docker build -t hoodie .`. I ju
 
 List of attached devices. make sure you see your phone in that list.
 
-    docker run --rm -i -v $(pwd):/workspace -w /home/hoodie --privileged hoodie hoodie
+    docker run --rm -i -v $(pwd):/workspace -w /workspace --privileged hoodie hoodie
 
 ## References
