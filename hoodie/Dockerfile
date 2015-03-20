@@ -17,6 +17,9 @@ EXPOSE 6001 6002
 # this avoids asking for couch admin pw
 # this avoid hoodie only accepting connections from localhost (kinda pointless in a docker world)
 ENV HOODIE_BIND_ADDRESS 0.0.0.0
+
+USER docker
+
 VOLUME /workspace
 WORKDIR /workspace
 
