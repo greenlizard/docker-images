@@ -20,5 +20,3 @@ USER hoodie
 WORKDIR /home/hoodie
 # Expose the port
 EXPOSE 9000
-# Always run as the hoodie user
-CMD ['/bin/bash']
