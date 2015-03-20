@@ -12,15 +12,23 @@ RUN npm install -g hoodie-cli
 
 ENV HOODIE_BIND_ADDRESS 0.0.0.0
 
-RUN adduser --disabled-password \
-            --system \
+RUN adduser --system \
             -m \
             --home /home/hoodie \
             --shell /bin/bash \
             --no-user-group \
-            -c "Hoodie Administrator" hoodie \
-            --gecos "" hoodie; \
+            -c "Hoodie Administrator" hoodie; \
         echo "hoodie ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# RUN adduser --disabled-password \
+#             --system \
+#             -m \
+#             --home /home/hoodie \
+#             --shell /bin/bash \
+#             --no-user-group \
+#             -c "Hoodie Administrator" hoodie \
+#             --gecos "" hoodie; \
+#         echo "hoodie ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER hoodie
 
