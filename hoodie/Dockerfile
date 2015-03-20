@@ -12,17 +12,17 @@ RUN npm install -g hoodie-cli
 
 ENV HOODIE_BIND_ADDRESS 0.0.0.0
 
-RUN adduser --disabled-password \
-            --system \
-            --home /home/hoodie \
-            --shell /bin/bash \
-            -c "Hoodie Administrator" \
-            --gecos "" hoodie; \
-        echo "hoodie ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+# RUN adduser --disabled-password \
+#             --system \
+#             --home /home/hoodie \
+#             --shell /bin/bash \
+#             -c "Hoodie Administrator" \
+#             --gecos "" hoodie; \
+#         echo "hoodie ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+# 
+# USER hoodie
 
-USER hoodie
-
-ENV HOME /home/hoodie
-WORKDIR /home/hoodie
+ENV HOME /workspace
+WORKDIR /workspace
 # Expose the port
 EXPOSE 6001 6002 
