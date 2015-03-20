@@ -11,12 +11,20 @@ RUN npm install -g hoodie-cli
 # this avoid hoodie only accepting connections from localhost (kinda pointless in a docker world)
 
 ENV HOODIE_BIND_ADDRESS 0.0.0.0
-EXPOSE 6001 6002 
 
-RUN adduser --disabled-password --gecos "" hoodie; \
-  echo "hoodie ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-ENV HOME /home/hoodie
+RUN adduser --disabled-password \
+            --system \
+            -m \
+            --home /home/hoodie \
+            --shell /bin/bash \
+            --no-user-group \
+            -c "Hoodie Administrator" hoodie \
+            --gecos "" hoodie; \
+        echo "hoodie ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 USER hoodie
+
+ENV HOME /home/hoodie
 WORKDIR /home/hoodie
 # Expose the port
-EXPOSE 9000
+EXPOSE 6001 6002 
