@@ -1,41 +1,19 @@
 
-FROM debian:wheezy
+FROM greenlizard/nvm
 
 MAINTAINER GreenLizard Labs <gabriel@greenlizard.com.br>
 
-RUN groupadd -r hoodie && useradd -g hoodie hoodie
+ENV NODE_VERSION 0.10
+RUN /bin/bash -l -c "nvm install $NODE_VERSION && nvm use $NODE_VERSION && rm -rf $HOME/.nvm/bin && ln -s \$NVM_BIN $HOME/.nvm/bin"
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-      build-essential \
-      curl \
-      libffi-dev \
-      libgdbm-dev \
-      libncurses-dev \
-      libreadline6-dev \
-      libssl-dev \
-      libyaml-dev \
-      zlib1g-dev \
-      vim \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN mkdir /home/hoodie && \
-    chown -R hoodie:hoodie /home/hoodie
+RUN addgroup --gid=2000 hoodie && \
+    adduser --system --uid=2000 --home /home/hoodie --shell /bin/bash hoodie && \
+    echo "hoodie ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
+    chown -R hoodie:hoodie /home/hoodie && \
+    chown -R hoodie:hoodie /usr/local
 
 USER hoodie
-
-ENV NODE_VERSION 0.10.36
-ENV PATH $HOME/.nvm/bin:$PATH
-
-RUN touch $HOME/.bashrc
-RUN curl --location https://raw.github.com/creationix/nvm/master/install.sh | sh 
-RUN /bin/bash -c "source /$HOME/.bashrc"
-
-RUN nvm install $NODE_VERSION && \
-    nvm use $NODE_VERSION && \
-    nvm alias default $NODE_VERSION
-
-# node
 RUN npm install -g hoodie-cli
  
 # Alt dependencies
