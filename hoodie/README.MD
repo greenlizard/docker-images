@@ -42,8 +42,6 @@ The readme has the build command. For emample - `docker build -t hoodie .`. I ju
 
 ## Useful commands
 
-List of attached devices. make sure you see your phone in that list.
-
     docker run --rm -i -v $(pwd):/workspace -w /workspace --privileged hoodie hoodie
 
 ## References
