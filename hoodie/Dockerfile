@@ -12,17 +12,33 @@ RUN npm install -g hoodie-cli
 
 ENV HOODIE_BIND_ADDRESS 0.0.0.0
 
-# RUN adduser --disabled-password \
-#             --system \
-#             --home /home/hoodie \
-#             --shell /bin/bash \
-#             -c "Hoodie Administrator" \
-#             --gecos "" hoodie; \
-#         echo "hoodie ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-# 
-# USER hoodie
+# Add an xroot user because hoodie doesn't like being root
+RUN adduser --disabled-password --gecos "" xroot && \
+  echo "xroot ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-ENV HOME /workspace
-WORKDIR /workspace
+RUN apt-get -yq remove adduser
+
 # Expose the port
-EXPOSE 6001 6002 
+EXPOSE 6001 6002
+
+ENV HOME /home/xroot
+
+ENV LANG en_US.UTF-8
+
+RUN mkdir /src && chown xroot:xroot /src
+WORKDIR /src
+
+
+USER xroot
+
+# Set aliases
+RUN echo "alias ls='ls --color=auto'" >> /home/xroot/.bashrc
+RUN echo "alias ll='ls --color=auto -l'" >> /home/xroot/.bashrc
+RUN echo "alias l='ls --color=auto -lA'" >> /home/xroot/.bashrc
+RUN echo "alias c='clear'" >> /home/xroot/.bashrc
+
+CMD /bin/bash
+
+ONBUILD RUN npm install
+ONBUILD RUN bower install
+
