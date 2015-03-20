@@ -13,7 +13,12 @@ RUN npm install -g hoodie-cli
 ENV HOODIE_BIND_ADDRESS 0.0.0.0
 EXPOSE 6001 6002 
 
-VOLUME /workspace
-WORKDIR /workspace
-
-CMD ["hoodie"]
+RUN adduser --disabled-password --gecos "" hoodie; \
+  echo "hoodie ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+ENV HOME /home/hoodie
+USER hoodie
+WORKDIR /home/hoodie
+# Expose the port
+EXPOSE 9000
+# Always run as the hoodie user
+CMD ['/bin/bash']
