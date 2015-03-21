@@ -11,10 +11,8 @@
 
 ## Setup
 
-    git clone git@github.com:greenlizard/docker-images.git
-    cd docker-images/hoodie
-    docker build -t hoodie .
-    echo "alias hoodie='docker run --rm -i -u docker -v $(pwd):/workspace -w /workspace --privileged hoodie hoodie
+    docker run -d -p 6003:6003 --name couchdb klaemo/couchdb
+    echo "alias hoodie='docker run --rm -it --link couchdb:couchdb -v $(pwd):/src --name hoodie greenlizard/hoodie hoodie
 '" >> ~/.bash_aliases
     source ~/.bash_aliases
 
@@ -43,7 +41,8 @@ The readme has the build command. For emample - `docker build -t hoodie .`. I ju
 
 ## Useful commands
 
-    alias hoodie="docker run --rm -it -v $(pwd):/src hoodie hoodie"
+    docker run -d -p 6003:6003 --name couchdb klaemo/couchdb
+    alias hoodie='docker run --rm -it --link couchdb:couchdb -v $(pwd):/src --name hoodie greenlizard/hoodie hoodie'
     docker run --rm -it --link couchdb:couchdb -v $(pwd):/src hoodie /bin/bash
 
 ## References
