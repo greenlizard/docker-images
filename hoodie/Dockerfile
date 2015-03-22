@@ -10,8 +10,6 @@ RUN npm install -g hoodie-cli
 # this avoids asking for couch admin pw
 # this avoid hoodie only accepting connections from localhost (kinda pointless in a docker world)
 
-ENV HOODIE_BIND_ADDRESS 0.0.0.0
-
 # Add an xroot user because hoodie doesn't like being root
 RUN adduser --disabled-password --gecos "" xroot && \
   echo "xroot ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
@@ -37,9 +35,10 @@ RUN echo "alias ll='ls --color=auto -l'" >> /home/xroot/.bashrc
 RUN echo "alias l='ls --color=auto -lA'" >> /home/xroot/.bashrc
 RUN echo "alias c='clear'" >> /home/xroot/.bashrc
 
-ENV COUCH_URL http://couchdb:5984
-#ENV HOODIE_ADMIN_USER admin
-#ENV HOODIE_ADMIN_PASS admin
+ENV HOODIE_BIND_ADDRESS 0.0.0.0
+ENV HOODIE_ADMIN_USER admin
+ENV HOODIE_ADMIN_PASS admin
+ENV COUCH_URL "http://$HOODIE_ADMIN_USER:$HOODIE_ADMIN_PASS@couchdb:5984"
 
 ONBUILD RUN npm install
 

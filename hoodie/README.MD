@@ -42,8 +42,8 @@ The readme has the build command. For emample - `docker build -t hoodie .`. I ju
 ## Useful commands
 
     docker run -d -p 6003:5984 --name couchdb klaemo/couchdb
-    docker run --rm -it --link couchdb:couchdb -v $(pwd):/src -w /src --name hoodie greenlizard/hoodie
-    alias hoodie="docker run --rm -it hoodie hoodie"
+    docker run --rm -it --link couchdb:couchdb -v $(pwd):/src -w /src --name hoodie greenlizard/hoodie hoodie
+    alias hoodie="docker run --rm -i --link couchdb:couchdb -v $(pwd):/src -w /src --name hoodie greenlizard/hoodie hoodie"
     docker run --rm -it --link couchdb:couchdb -v $(pwd):/src -w /src greenlizard/hoodie hoodie
 
 ## References
