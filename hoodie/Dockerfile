@@ -24,7 +24,7 @@ RUN mkdir /src && chown xroot:xroot /src
 
 VOLUME /src
 WORKDIR /src
-EXPOSE WWW ADMIN
+EXPOSE $WWW $ADMIN
 
 
 USER xroot
@@ -36,4 +36,4 @@ ENV COUCH_URL "http://$HOODIE_ADMIN_USER:$HOODIE_ADMIN_PASS@couchdb:5984"
 
 ONBUILD RUN npm install
 
-ENTRYPOINT [ "hoodie" ]
+ENTRYPOINT [ "node_modules/hoodie-server/bin/start" ]
