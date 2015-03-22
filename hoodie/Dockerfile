@@ -39,4 +39,4 @@ RUN echo "alias c='clear'" >> /home/xroot/.bashrc
 
 ONBUILD RUN npm install
 
-#CMD [ "hoodie" ]
+CMD [ "/bin/bash" ]
