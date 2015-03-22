@@ -37,6 +37,10 @@ RUN echo "alias ll='ls --color=auto -l'" >> /home/xroot/.bashrc
 RUN echo "alias l='ls --color=auto -lA'" >> /home/xroot/.bashrc
 RUN echo "alias c='clear'" >> /home/xroot/.bashrc
 
+ENV COUCH_URL http://couchdb:5984
+#ENV HOODIE_ADMIN_USER admin
+#ENV HOODIE_ADMIN_PASS admin
+
 ONBUILD RUN npm install
 
 CMD [ "/bin/bash" ]
