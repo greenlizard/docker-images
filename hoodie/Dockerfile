@@ -36,4 +36,5 @@ ENV COUCH_URL "http://$HOODIE_ADMIN_USER:$HOODIE_ADMIN_PASS@couchdb:5984"
 
 ONBUILD RUN npm install
 
-ENTRYPOINT [ "node_modules/hoodie-server/bin/start" ]
+ENTRYPOINT [ "hoodie" ]
+#ENTRYPOINT [ "node_modules/hoodie-server/bin/start" ]
