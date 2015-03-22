@@ -1,5 +1,5 @@
 
-FROM debian:wheezy
+FROM google/debian:wheezy
 
 MAINTAINER GreenLizard Labs <gabriel@greenlizard.com.br>
 
@@ -7,7 +7,6 @@ ENV HOME /home
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       build-essential \
-      curl \
       libffi-dev \
       libgdbm-dev \
       libncurses-dev \
@@ -15,9 +14,10 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       libssl-dev \
       libyaml-dev \
       zlib1g-dev \
-      vim \
       sudo \
+      curl \
       git \
+      vim \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
