@@ -24,6 +24,8 @@ ENV HOME /home/xroot
 ENV LANG en_US.UTF-8
 
 RUN mkdir /src && chown xroot:xroot /src
+
+VOLUME /src
 WORKDIR /src
 
 
@@ -37,4 +39,4 @@ RUN echo "alias c='clear'" >> /home/xroot/.bashrc
 
 ONBUILD RUN npm install
 
-CMD [ "hoodie" ]
+#CMD [ "hoodie" ]
