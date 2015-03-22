@@ -4,18 +4,17 @@ FROM node:0.10-wheezy
 MAINTAINER GreenLizard Labs <gabriel@greenlizard.com.br>
 
 RUN npm install -g hoodie-cli
- 
-# Alt dependencies
-
-# this avoids asking for couch admin pw
-# this avoid hoodie only accepting connections from localhost (kinda pointless in a docker world)
 
 # Add an xroot user because hoodie doesn't like being root
 RUN adduser --disabled-password --gecos "" xroot && \
   echo "xroot ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Expose the port
-EXPOSE 6001 6002
+
+ENV WWW 6001
+ENV ADMIN 6002
+ENV COUCH 5984
+
 
 ENV HOME /home/xroot
 
@@ -25,15 +24,10 @@ RUN mkdir /src && chown xroot:xroot /src
 
 VOLUME /src
 WORKDIR /src
+EXPOSE WWW ADMIN
 
 
 USER xroot
-
-# Set aliases
-RUN echo "alias ls='ls --color=auto'" >> /home/xroot/.bashrc
-RUN echo "alias ll='ls --color=auto -l'" >> /home/xroot/.bashrc
-RUN echo "alias l='ls --color=auto -lA'" >> /home/xroot/.bashrc
-RUN echo "alias c='clear'" >> /home/xroot/.bashrc
 
 ENV HOODIE_BIND_ADDRESS 0.0.0.0
 ENV HOODIE_ADMIN_USER admin
@@ -42,4 +36,4 @@ ENV COUCH_URL "http://$HOODIE_ADMIN_USER:$HOODIE_ADMIN_PASS@couchdb:5984"
 
 ONBUILD RUN npm install
 
-CMD [ "/bin/bash" ]
+ENTRYPOINT [ "hoodie" ]
