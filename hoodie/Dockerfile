@@ -1,5 +1,5 @@
 
-FROM greenlizard/base
+FROM greenlizard/nodejs
 
 MAINTAINER GreenLizard Labs <gabriel@greenlizard.com.br>
 
