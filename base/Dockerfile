@@ -1,5 +1,5 @@
 
-FROM google/debian:wheezy
+FROM debian:wheezy
 
 MAINTAINER GreenLizard Labs <gabriel@greenlizard.com.br>
 

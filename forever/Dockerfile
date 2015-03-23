@@ -1,5 +1,5 @@
 
-FROM node:0.10-wheezy
+FROM greenlizard/base
 
 MAINTAINER GreenLizard Labs <gabriel@greenlizard.com.br>
 
