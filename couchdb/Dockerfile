@@ -1,6 +1,6 @@
 FROM greenlizard/base
 
-MAINTAINER Clemens Stolle klaemo@fastmail.fm
+MAINTAINER GreenLizard Labs <gabriel@greenlizard.com.br>
 
 # Install instructions from https://cwiki.apache.org/confluence/display/COUCHDB/Debian
 
