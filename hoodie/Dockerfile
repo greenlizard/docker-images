@@ -26,9 +26,6 @@ VOLUME /src
 WORKDIR /src
 EXPOSE $WWW $ADMIN
 
-
-USER xroot
-
 ENV HOODIE_BIND_ADDRESS 0.0.0.0
 ENV HOODIE_ADMIN_USER admin
 ENV HOODIE_ADMIN_PASS admin
@@ -36,5 +33,9 @@ ENV COUCH_URL http://couchdb:5984
 
 ONBUILD RUN npm install
 
-#ENTRYPOINT [ "hoodie" ]
-ENTRYPOINT [ "/bin/bash" ]
+COPY ./docker-entrypoint.sh /entrypoint.sh
+
+USER xroot
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["hoodie"]
