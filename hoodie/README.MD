@@ -43,7 +43,7 @@ The readme has the build command. For emample - `docker build -t hoodie .`. I ju
 
     docker run -d -p 6003:5984 --name couchdb greenlizard/couchdb
     docker run --rm -it --link couchdb:couchdb -v $(pwd):/src -w /src --name hoodie greenlizard/hoodie
-    alias hoodie="docker run --rm -i --link couchdb:couchdb -v $(pwd):/src -w /src --name hoodie greenlizard/hoodie"
+    alias hoodie="docker run --rm -it --link couchdb:couchdb -v $(pwd):/src -w /src --name hoodie greenlizard/hoodie"
 
 
 ## References

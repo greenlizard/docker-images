@@ -1,5 +1,5 @@
 
-FROM greenlizard/base
+FROM greenlizard/hoodie
 
 MAINTAINER GreenLizard Labs <gabriel@greenlizard.com.br>
 
@@ -12,5 +12,8 @@ RUN cd /opt/apps/node-docker && npm install
 
 ENV HOODIE_BIND_ADDRESS 0.0.0.0
 EXPOSE 6001 6002 
+
+
+#forever start -o /var/log/app.out.log -e /var/log/app.err.log -a --killSignal=SIGTERM /path/to/myapp/node_modules/hoodie-server/bin/start
 
 CMD forever /opt/apps/node-docker/app.js

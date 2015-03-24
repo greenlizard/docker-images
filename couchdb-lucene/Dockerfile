@@ -32,6 +32,9 @@ RUN sed -e 's/^host=localhost$/host=0.0.0.0/' -i /opt/couchdb-lucene-$COUCHDB_LU
 
 RUN chown -R couchdb:couchdb /opt/couchdb-lucene-$COUCHDB_LUCENE_VERSION
 
+
+
+
 # USER couchdb
 CMD ["/opt/start_couch"]
 

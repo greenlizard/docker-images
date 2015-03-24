@@ -1,0 +1,16 @@
+web:
+  build: hoodie
+  links:
+   - db
+  ports:
+   - "6001:6002"
+db:
+  build: couchdb
+  ports:
+  - "5984:5984"
+fti:
+  build: couchdb-lucene
+  links:
+   - db
+  ports:
+  - "5985:5985"  
