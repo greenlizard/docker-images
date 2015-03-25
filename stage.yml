@@ -1,0 +1,21 @@
+couchdb:
+  image: greenlizard/couchdb
+  ports:
+  - "127.0.0.1:5984:5984"
+fti:
+  image: greenlizard/couchdb-lucene
+  links:
+   - couchdb
+  ports:
+  - "127.0.0.1:5985:5985"  
+web:
+  image: greenlizard/hoodie
+  environment:
+  - "HOODIE_ADMIN_PASS: admin"
+  links:
+  - couchdb
+  ports:
+  - "127.0.0.1:6001:6001"
+  - "127.0.0.1:6002:6002"
+  volumes:
+  - ../test-hoodie:/src
