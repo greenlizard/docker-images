@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
+sed -e 's/localhost:5984/couchdb:5984/' -i /opt/couchdb-lucene-$COUCHDB_LUCENE_VERSION/conf/couchdb-lucene.ini
 
-echo 's/localhost:5984/'$COUCHDB_1_PORT_5984_TCP_ADDR':'$COUCHDB_PORT_5984_TCP_PORT'/'
-
-sed -e 's/localhost:5984/'$COUCHDB_1_PORT_5984_TCP_ADDR':'$COUCHDB_PORT_5984_TCP_PORT'/' -i /opt/couchdb-lucene-$COUCHDB_LUCENE_VERSION/conf/couchdb-lucene.ini
-
-su - couchdb -c 'mon /opt/couchdb-lucene-$COUCHDB_LUCENE_VERSION/bin/run'
+/opt/couchdb-lucene-$COUCHDB_LUCENE_VERSION/bin/run
 

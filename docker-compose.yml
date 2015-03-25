@@ -2,12 +2,12 @@ couchdb:
   build: couchdb
   ports:
   - "127.0.0.1:5984:5984"
-#fti:
-#  build: couchdb-lucene
-#  links:
-#   - couchdb
-#  ports:
-#  - "127.0.0.1:5985:5985"  
+fti:
+  build: couchdb-lucene
+  links:
+   - couchdb
+  ports:
+  - "127.0.0.1:5985:5985"  
 web:
   build: hoodie
   environment:

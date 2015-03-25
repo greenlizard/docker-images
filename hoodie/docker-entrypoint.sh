@@ -7,5 +7,5 @@ until [ "`curl -X PUT $COUCH_URL/_config/admins/$HOODIE_ADMIN_USER -d '"'$HOODIE
 done;
 
 #Set Admin on couchdb
-
+rm -f /src/data/hoodie.pid
 HOME=/src exec hoodie "$@"
