@@ -11,12 +11,13 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 
 RUN npm install -g hoodie-cli
 
+RUN curl -sSL https://get.docker.com/ | sh
+
 # Add an xroot user because hoodie doesn't like being root
 RUN adduser --disabled-password --gecos "" xroot && \
   echo "xroot ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 # Expose the port
-USER root
 ENV WWW 6001
 ENV ADMIN 6002
 ENV COUCH 5984
@@ -33,9 +34,10 @@ WORKDIR /src
 EXPOSE $WWW $ADMIN
 
 ENV HOODIE_BIND_ADDRESS 0.0.0.0
-#ENV HOODIE_ADMIN_USER admin
-#ENV HOODIE_ADMIN_PASS admin
-ENV COUCH_URL http://couchdb:5984
+ENV HOODIE_ADMIN_USER admin
+ENV HOODIE_ADMIN_PASS admin
+ENV COUCH_URL http://couchdb:$COUCH
+
 
 #hoodie    soft    nofile    768
 #hoodie    hard    nofile    1024
@@ -44,10 +46,11 @@ ENV COUCH_URL http://couchdb:5984
 #RUN sed -e 's/^delayed_commits = .*$/delayed_commits = false/' -i /usr/local/etc/couchdb/default.ini
 #RUN sed -e 's/^max_dbs_open = .*$/max_dbs_open = 1024/' -i /usr/local/etc/couchdb/default.ini
 #RUN sed -e 's/^timeout = .*$/timeout = 1209600/' -i /usr/local/etc/couchdb/default.ini
+COPY ./docker-entrypoint.sh /entrypoint.sh
 
 USER xroot
 ONBUILD RUN npm install
 
-#CMD [ "/bin/bash" ]
+ENTRYPOINT ["/entrypoint.sh"]
+CMD [ "start", "--noBrowser", "--custon-ports", "$WWW,$ADMIN" ]
 #ENTRYPOINT [ "hoodie" ]
-ENTRYPOINT [ "/bin/bash" ]
