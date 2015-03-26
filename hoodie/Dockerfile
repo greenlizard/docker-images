@@ -48,6 +48,8 @@ ENV COUCH_URL http://couchdb:$COUCH
 #RUN sed -e 's/^timeout = .*$/timeout = 1209600/' -i /usr/local/etc/couchdb/default.ini
 COPY ./docker-entrypoint.sh /entrypoint.sh
 
+RUN chmod +x /entrypoint.sh
+
 USER xroot
 ONBUILD RUN npm install
 
