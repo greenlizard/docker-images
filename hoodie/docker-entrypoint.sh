@@ -9,7 +9,7 @@ done;
 if [ "$1" = 'hoodie' ]; then
   # we need to set the permissions here because docker mounts volumes as root
   chown -R xroot:xroot /src
-  HOME=/src exec gosu xroot "$@"
+  HOME=/src/hoodie exec gosu xroot "$@"
 fi
 
 #Set Admin on couchdb
