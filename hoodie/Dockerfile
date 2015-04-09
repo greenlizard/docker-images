@@ -54,5 +54,5 @@ USER xroot
 ONBUILD RUN npm install
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD [ "start", "--noBrowser", "--custon-ports", "$WWW,$ADMIN" ]
+CMD [ "hoodie", "start", "--noBrowser", "--custon-ports", "$WWW,$ADMIN" ]
 #ENTRYPOINT [ "hoodie" ]

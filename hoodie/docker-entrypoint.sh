@@ -8,4 +8,4 @@ done;
 
 #Set Admin on couchdb
 rm -f /src/data/hoodie.pid
-HOME=/src exec hoodie "$@"
+HOME=/src exec "$@"

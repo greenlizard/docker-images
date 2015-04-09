@@ -18,4 +18,4 @@ web:
   - "127.0.0.1:6001:6001"
   - "127.0.0.1:6002:6002"
   volumes:
-  - ../test-hoodie:/src
+  - ../hoodie-test:/src
