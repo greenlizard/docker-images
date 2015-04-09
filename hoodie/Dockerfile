@@ -49,9 +49,11 @@ ENV COUCH_URL http://couchdb:$COUCH
 COPY ./docker-entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
+RUN chown xroot:xroot /entrypoint.sh
 
 USER xroot
 ONBUILD RUN npm install
+
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD [ "hoodie", "start", "--noBrowser", "--custon-ports", "$WWW,$ADMIN" ]
